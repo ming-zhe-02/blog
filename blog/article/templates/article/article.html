@@ -1,5 +1,44 @@
 {% extends 'main/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'article/css/article.css' %}">
+{% endblock %}
 {% block heading %}歡迎蒞臨{% endblock %}
 {% block content %}
-222
+<p><a href="{% url 'article:articleCreate' %}" class="btn btn-primary" role="button">新增文章</a>
+
+{% for article, comments in articles.items %}
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 aa">
+      <h3 class="cc"><a href="{% url 'article:articleRead' article.id %}">{{ article.title }}</a></h3>
+      <a class="btn btn-info cc" href="{% url 'article:articleUpdate' article.id %}">修改</a>
+      <p>發表時間：{{ article.pubDateTime|date:'Y-m-d H:i' }}</p>
+      <div class="articleContent">{{ article.content|linebreaks|truncatechars_html:30 }}</div>
+      <p class=like>
+         <img id=like src="{% static 'main/img/like.png' %}" alt="Like"> {{ article.likes.count }}
+      </p>
+      <form class="deleteConfirm" class="inlineBlock" method="post" action="{% url 'article:articleDelete' article.id %}">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" value="刪除">
+      </form>
+      <div class="bb">
+       {% for comment in comments %}
+          <div class="commentDiv">
+            <span class="comment">{{ comment.content }}</span>
+            <br>
+            <span class="commentTime">{{ comment.pubDateTime|date:'m月d日 H:i' }}</span>
+          </div>
+       {% endfor %}
+       </div>
+      <hr>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  
+{% endfor %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'main/js/deleteConfirm.js' %}"></script>
 {% endblock %}
