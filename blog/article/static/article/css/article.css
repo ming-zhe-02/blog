@@ -1,0 +1,39 @@
+.aa{
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+.commentDiv {
+  margin-top: 1em;
+  
+}
+
+.comment {
+  font-size: 0.8em;
+}
+
+.commentTime {
+  font-size: 0.6em;
+  color: #777777;
+}
+
+.bb{
+  padding: 20px;
+  border: thin solid gray;
+  border-radius: 10px;
+}
+
+/* Misc */
+.cc {
+  display: inline-block;
+}
+
+.like {
+  font-weight: bold;
+  color: #3e7bd1;
+}
+
+img#like {
+  vertical-align: middle;
+  width: 1.6em;
+}
